@@ -209,8 +209,8 @@
   .about + .rule, .panel .rule { margin-top: 6px; }
 
   /* ---------- AWARDS (inside About Me) ---------- */
-  .awards { margin-top: clamp(24px, 5vw, 48px); margin-bottom: clamp(14px, 3vw, 26px); }
-  .awards h2 {
+  .block { margin: clamp(16px, 3.5vw, 32px) 0; }
+  .block h2 {
     text-align: center;
     text-shadow: none;
     text-transform: uppercase;
@@ -229,7 +229,9 @@
   .award-text .col:nth-child(1) { text-align: left; }
   .award-text .col:nth-child(2) { text-align: center; }
   .award-text .col:nth-child(3) { text-align: right; }
-  .award-text .award { margin-bottom: .55em; overflow-wrap: anywhere; }
+  .award-text { align-items: stretch; }
+  .award-text .col { display: flex; flex-direction: column; justify-content: space-between; gap: .4em; }
+  .award-text .award { margin: 0; overflow-wrap: anywhere; }
   .award-text b { display: block; font-weight: 700; }
 
   /* photos: 3 rounded boxes in a row */
@@ -248,6 +250,52 @@
   }
   .award-photos .shot img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+
+  /* intro text + 5-photo rows (Dance, Cosplay/Guesting) */
+  .intro {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: clamp(10px, 1.75vw, 17px);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .photo-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(5px, 1.4vw, 15px);
+    margin-top: clamp(14px, 3vw, 30px);
+  }
+  .photo-row .shot {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 184 / 251;
+    background: #ffb3d3;
+    border-radius: 12%;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .photo-row .shot img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .photo-row .cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 0 3px clamp(4px, 1.2vw, 12px);
+    text-align: center;
+    font-weight: 700;
+    font-size: clamp(6px, 1.55vw, 15px);
+    line-height: 1.1;
+    text-shadow: 0 0 4px var(--pink-shadow), 1px 1px 0 var(--pink-shadow);
+  }
+  .photo-row .shot:focus-visible { outline: 3px solid var(--white); outline-offset: 2px; }
+  .photo-note {
+    text-align: center;
+    margin-top: clamp(8px, 1.6vw, 14px);
+    font-size: clamp(8px, 1.4vw, 13px);
+    font-weight: 500;
   }
 
   /* gallery grids for other tabs */
@@ -302,6 +350,8 @@
        images/photo1.jpg ... images/photo5.jpg   -> top photobox (5 slots)
        images/about.jpg                          -> "About Me" picture
        images/award1.jpg ... award3.jpg          -> Awards photos (3 rounded boxes under the awards text)
+       images/dance1.jpg ... dance5.jpg          -> Dance photos
+       images/guesting1.jpg ... guesting5.jpg    -> Cosplay/Guesting photos
        images/cosplay1.jpg ... cosplay8.jpg      -> Cosplay Highlights
        images/other1.jpg ... other8.jpg          -> Other Highlights
   Slots show a pink placeholder until the image file exists.
@@ -311,10 +361,10 @@
 
   <!-- PHOTO BOX -->
   <header class="photobox" aria-label="Photo gallery header">
-    <div class="slot"><img src="images/photo1 2.jpg" alt="Yuki Teru cosplay 1" onerror="this.remove()"></div>
-    <div class="slot"><img src="images/photo2 3.jpg" alt="Yuki Teru cosplay 2" onerror="this.remove()"></div>
-    <div class="slot"><img src="images/photo3 3.jpg" alt="Yuki Teru cosplay 3" onerror="this.remove()"></div>
-    <div class="slot"><img src="images/photo4 2.jpg" alt="Yuki Teru cosplay 4" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo1.jpg" alt="Yuki Teru cosplay 1" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo2.jpg" alt="Yuki Teru cosplay 2" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo3.jpg" alt="Yuki Teru cosplay 3" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo4.jpg" alt="Yuki Teru cosplay 4" onerror="this.remove()"></div>
     <div class="slot"><img src="images/photo5.jpg" alt="Yuki Teru cosplay 5" onerror="this.remove()"></div>
     <div class="brand">Yuki Teru</div>
   </header>
@@ -354,7 +404,8 @@
     </div>
 
     <!-- AWARDS: title, then 3 text columns, then 3 photos (images/award1.jpg to award3.jpg) -->
-    <div class="awards">
+    <div class="rule"></div>
+    <div class="awards block">
       <h2>Awards</h2>
       <div class="award-text">
         <div class="col">
@@ -382,6 +433,35 @@
         <div class="shot"><img src="images/award1.jpg" alt="" onerror="this.remove()"></div>
         <div class="shot"><img src="images/award2.jpg" alt="" onerror="this.remove()"></div>
         <div class="shot"><img src="images/award3.jpg" alt="" onerror="this.remove()"></div>
+      </div>
+    </div>
+    <div class="rule"></div>
+
+    <!-- COSPLAY / GUESTING: edit the text, captions and links (href="#") below. Photos: images/guesting1.jpg ... guesting5.jpg -->
+    <div class="block">
+      <h2>Cosplay/Guesting</h2>
+      <p class="intro">Add your description about your cosplay and guesting experience here.</p>
+      <div class="photo-row">
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/guesting1.jpg" alt="Guest Cosplayer" onerror="this.remove()"><span class="cap">Guest Cosplayer</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/guesting2.jpg" alt="Cosplay Judge" onerror="this.remove()"><span class="cap">Cosplay Judge</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/guesting3.jpg" alt="Cosplay Judge" onerror="this.remove()"><span class="cap">Cosplay Judge</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/guesting4.jpg" alt="Guest Performer" onerror="this.remove()"><span class="cap">Guest Performer</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/guesting5.jpg" alt="Cosplay Judge" onerror="this.remove()"><span class="cap">Cosplay Judge</span></a>
+      </div>
+      <p class="photo-note">(Click the images to get redirected to certain posts)</p>
+    </div>
+    <div class="rule"></div>
+
+    <!-- DANCE: edit the text, captions and links (href="#") below. Photos: images/dance1.jpg ... dance5.jpg -->
+    <div class="block">
+      <h2>Dance</h2>
+      <p class="intro">Add your description about your dance experience here.</p>
+      <div class="photo-row">
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/dance1.jpg" alt="Mass Dance" onerror="this.remove()"><span class="cap">Mass Dance</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/dance2.jpg" alt="Group Dance" onerror="this.remove()"><span class="cap">Group Dance</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/dance3.jpg" alt="Solo Dance" onerror="this.remove()"><span class="cap">Solo Dance</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/dance4.jpg" alt="Solo Dance" onerror="this.remove()"><span class="cap">Solo Dance</span></a>
+        <a class="shot" href="#" target="_blank" rel="noopener"><img src="images/dance5.jpg" alt="Group Dance" onerror="this.remove()"><span class="cap">Group Dance</span></a>
       </div>
     </div>
     <div class="rule"></div>
