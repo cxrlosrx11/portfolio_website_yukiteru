@@ -134,22 +134,28 @@
 
   .about {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;  /* photo 40% / text 60% - change these numbers to resize the photo */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);  /* photo 50% / text 50%, also on mobile */
     gap: clamp(10px, 3vw, 32px);
     align-items: stretch;
   }
-  .about-text {
+  /* text sits in the flow, so the row is never shorter than the text (no overlap with Awards) */
+  .about-text { display: flex; flex-direction: column; }
+  .about-text .fit {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: clamp(6px, 1.6vw, 14px);
+    gap: 4px;
+    font-size: var(--fs, clamp(8px, 1.75vw, 15px));
   }
+  .about-text.measuring { align-self: start; }
+  .about-text.measuring .fit { flex: none; }
   .about-img {
     position: relative;
-    aspect-ratio: 4 / 5;
     overflow: hidden;
     background: linear-gradient(180deg, #a9dcf5 0%, #d9f1fc 62%, #eefaff 100%);
   }
+  .about-img::before { content: ""; display: block; padding-top: 122.1%; }
   .about-img .cloud {
     position: absolute;
     left: 25%;
@@ -198,6 +204,7 @@
     text-transform: uppercase;
     margin-bottom: 0;
   }
+  .about-text h1 { font-size: min(4.4em, 84px, 7.6vw); }
   .panel h2 { text-shadow: 3px 3px 0 var(--pink-shadow), 0 0 12px rgba(214,69,127,.5); text-transform: none; font-size: clamp(44px, 8.2vw, 84px); }
   .about + .rule, .panel .rule { margin-top: 6px; }
 
@@ -341,10 +348,12 @@
         <span class="credit">© Photographer Name</span>
       </div>
       <div class="about-text">
+       <div class="fit">
         <h1>Cosplayer<br>Summary</h1>
         <p>Hey! My name is Yuki Teru, but you can simply call me Yuki.</p>
         <p>I’m a cosplayer, performer, and creative who enjoys bringing characters and ideas to life through different forms of entertainment: cosplay appearances, interactive events, dance performances, and I also offer crochet workshops such as crochet and creative makeup.</p>
         <p>I’m always open to trying new things, whether it’s hosting, participating in unique activities, or taking on a new event concept. If it’s something within my abilities, I’d be more than happy to explore it and create something memorable with you!</p>
+       </div>
       </div>
     </div>
 
@@ -431,18 +440,41 @@
 </main>
 
 <script>
+  // Fit the About Me text to the photo height (largest size that still fits)
+  function fitAbout() {
+    var box = document.querySelector('.about-text');
+    var img = document.querySelector('.about-img');
+    var fit = box && box.querySelector('.fit');
+    if (!fit || !fit.offsetParent) return;
+    var target = img.offsetWidth * 652 / 534;
+    box.classList.add('measuring');
+    var lo = 8.5, hi = 19;  // 8.5px = smallest allowed; if text needs more room the photo grows taller
+    for (var i = 0; i < 12; i++) {
+      var mid = (lo + hi) / 2;
+      fit.style.setProperty('--fs', mid + 'px');
+      if (fit.offsetHeight > target) hi = mid; else lo = mid;
+    }
+    fit.style.setProperty('--fs', lo + 'px');
+    box.classList.remove('measuring');
+  }
+  window.addEventListener('resize', fitAbout);
+  window.addEventListener('load', fitAbout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAbout);
+
   // Tabs
   var tabs = document.querySelectorAll('nav button');
   var panels = document.querySelectorAll('.panel');
   function show(name) {
     tabs.forEach(function (t) { t.setAttribute('aria-selected', t.dataset.tab === name ? 'true' : 'false'); });
     panels.forEach(function (p) { p.classList.toggle('active', p.id === name); });
+    fitAbout();
   }
   tabs.forEach(function (t) {
     t.addEventListener('click', function () { show(t.dataset.tab); history.replaceState(null, '', '#' + t.dataset.tab); });
   });
   var start = location.hash.replace('#', '');
   if (start && document.getElementById(start)) show(start);
+  fitAbout();
 </script>
 </body>
 </html>
