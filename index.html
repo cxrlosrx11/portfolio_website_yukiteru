@@ -62,18 +62,6 @@
     object-position: center top;
     display: block;
   }
-  .photobox .slot .hint {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 6px;
-    font-size: clamp(9px, 1.4vw, 13px);
-    font-weight: 600;
-    color: rgba(255,255,255,.9);
-  }
   .brand {
     position: absolute;
     left: clamp(6px, 1.8vw, 20px);
@@ -219,10 +207,6 @@
   .grid .slot img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
   }
-  .grid .slot .hint {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 600; text-align: center; padding: 8px; color: rgba(255,255,255,.9);
-  }
 
   .rates { display: grid; gap: 14px; margin-top: 10px; }
   .rates .item {
@@ -269,11 +253,11 @@
 
   <!-- PHOTO BOX -->
   <header class="photobox" aria-label="Photo gallery header">
-    <div class="slot"><img src="images/photo1 2.jpg" alt="Yuki Teru cosplay 1" onerror="this.remove()"><div class="hint"></div></div>
-    <div class="slot"><img src="images/photo2 2.jpg" alt="Yuki Teru cosplay 2" onerror="this.remove()"><div class="hint"></div></div>
-    <div class="slot"><img src="images/photo3 2.jpg" alt="Yuki Teru cosplay 3" onerror="this.remove()"><div class="hint"></div></div>
-    <div class="slot"><img src="images/photo4 2.jpg" alt="Yuki Teru cosplay 4" onerror="this.remove()"><div class="hint"></div></div>
-    <div class="slot"><img src="images/photo5.jpg" alt="Yuki Teru cosplay 5" onerror="this.remove()"><div class="hint"></div></div>
+    <div class="slot"><img src="images/photo1.jpg" alt="Yuki Teru cosplay 1" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo2.jpg" alt="Yuki Teru cosplay 2" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo3.jpg" alt="Yuki Teru cosplay 3" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo4.jpg" alt="Yuki Teru cosplay 4" onerror="this.remove()"></div>
+    <div class="slot"><img src="images/photo5.jpg" alt="Yuki Teru cosplay 5" onerror="this.remove()"></div>
     <div class="brand">Yuki Teru</div>
   </header>
 
@@ -298,7 +282,7 @@
           <path d="M0 40 C 90 0, 190 20, 400 70 L400 220 L0 220 Z" fill="#b9e07a"/>
           <path d="M0 105 C 120 60, 260 70, 400 120 L400 220 L0 220 Z" fill="#8aa800"/>
         </svg>
-        <img src="images/about1.jpg" alt="Yuki Teru" onerror="this.remove()">
+        <img src="images/about.jpg" alt="Yuki Teru" onerror="this.remove()">
       </div>
       <div class="about-text">
         <h1>Cosplayer<br>Summary</h1>
@@ -313,14 +297,34 @@
   <!-- COSPLAY HIGHLIGHTS -->
   <section class="panel" id="cosplay" role="tabpanel" aria-labelledby="tab-cosplay">
     <h2>Cosplay Highlights</h2>
-    <div class="grid" id="grid-cosplay"></div>
+    <!-- COSPLAY HIGHLIGHTS PHOTOS: change the file names below, or copy a whole <div class="slot">...</div> line to add more -->
+    <div class="grid">
+      <div class="slot"><img src="images/cosplay1.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/cosplay2.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/cosplay3.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/cosplay4.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/cosplay5.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/cosplay6.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/cosplay7.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/cosplay8.jpg" alt="" onerror="this.remove()"></div>
+    </div>
     <div class="rule" style="margin-top:22px"></div>
   </section>
 
   <!-- OTHER HIGHLIGHTS -->
   <section class="panel" id="other" role="tabpanel" aria-labelledby="tab-other">
     <h2>Other Highlights</h2>
-    <div class="grid" id="grid-other"></div>
+    <!-- OTHER HIGHLIGHTS PHOTOS: change the file names below, or copy a whole <div class="slot">...</div> line to add more -->
+    <div class="grid">
+      <div class="slot"><img src="images/other1.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/other2.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/other3.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/other4.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/other5.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/other6.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/other7.jpg" alt="" onerror="this.remove()"></div>
+      <div class="slot"><img src="images/other8.jpg" alt="" onerror="this.remove()"></div>
+    </div>
     <div class="rule" style="margin-top:22px"></div>
   </section>
 
@@ -328,10 +332,10 @@
   <section class="panel" id="rates" role="tabpanel" aria-labelledby="tab-rates">
     <h2>Rates and Services</h2>
     <div class="rates">
-      <div class="item"><h3>Cosplay Appearances</h3><p>wala pa, coming soon....</p></p></div>
-      <div class="item"><h3>Interactive Events and Hosting</h3><p>wala pa, coming soon....</p></div>
-      <div class="item"><h3>Dance Performances</h3><p>wala pa, coming soon....</p></div>
-      <div class="item"><h3>Crochet and Creative Makeup Workshops</h3><p>wala pa, coming soon....</p></div>
+      <div class="item"><h3>Cosplay Appearances</h3><p>Add your rate and inclusions here.</p></div>
+      <div class="item"><h3>Interactive Events and Hosting</h3><p>Add your rate and inclusions here.</p></div>
+      <div class="item"><h3>Dance Performances</h3><p>Add your rate and inclusions here.</p></div>
+      <div class="item"><h3>Crochet and Creative Makeup Workshops</h3><p>Add your rate and inclusions here.</p></div>
     </div>
     <div class="rule" style="margin-top:22px"></div>
   </section>
@@ -339,19 +343,6 @@
 </main>
 
 <script>
-  // Build gallery slots (8 each) — edit the count or file names as needed
-  function buildGrid(id, prefix, count) {
-    var grid = document.getElementById(id);
-    for (var i = 1; i <= count; i++) {
-      var slot = document.createElement('div');
-      slot.className = 'slot';
-      slot.innerHTML = '<img src="images/' + prefix + i + '.jpg" alt="" onerror="this.remove()"><div class="hint">Photo ' + i + '</div>';
-      grid.appendChild(slot);
-    }
-  }
-  buildGrid('grid-cosplay', 'cosplay', 8);
-  buildGrid('grid-other', 'other', 8);
-
   // Tabs
   var tabs = document.querySelectorAll('nav button');
   var panels = document.querySelectorAll('.panel');
